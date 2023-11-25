@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magali Tello</title>
+    <script>
+        function calcularEp(m, g, h) {
+            return m * g * h;
+        }
+
+        function calcularVelocidadAlSuelo(Ep, m) {
+            // Calcular la velocidad usando la fórmula Ec = 1/2 * m * v^2
+            var v = Math.sqrt((2 * Ep) / m);
+
+            // Verificar si la velocidad es mayor a 100
+            if (v > 100) {
+                return "¡Qué rápido! La velocidad es " + v.toFixed(2) + " m/s";
+            } else {
+                return "Va lento. La velocidad es " + v.toFixed(2) + " m/s";
+            }
+        }
+
+        function pedirDatos() {
+            // Obtener los valores de entrada del usuario
+            var masa = parseFloat(prompt("Ingrese la masa (kg):"));
+            var altura = parseFloat(prompt("Ingrese la altura (m):"));
+
+            // Gravedad en la Tierra (9.8 m/s^2)
+            var gravedad = 9.8;
+
+            // Verificar si los valores son numéricos
+            if (isNaN(masa) || isNaN(altura)) {
+                alert("Por favor, ingrese valores numéricos para la masa y la altura.");
+                return;
+            }
+
+            // Calcular la energía potencial
+            var energiaPotencial = calcularEp(masa, gravedad, altura);
+
+            // Calcular la velocidad al suelo
+            var resultado = calcularVelocidadAlSuelo(energiaPotencial, masa);
+
+            // Mostrar el resultado
+            alert(resultado);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Calculadora de Energía y Velocidad</h1>
+    <button onclick="pedirDatos()">Calcular</button>
+    <br>
+    <a href="https://magalitello.github.io/sistdecontrol_6toAAV/">Inicio</a>
+</body>
+
+</html>

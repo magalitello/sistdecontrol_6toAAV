@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magali Tello</title>
+    <script>
+        function calcularXL(frecuencia, inductancia) {
+            return 2 * Math.PI * frecuencia * inductancia;
+        }
+
+        function calcularXC(frecuencia, capacitancia) {
+            return 1 / (2 * Math.PI * frecuencia * capacitancia);
+        }
+
+        function calcularModuloZ(resistencia, XL, XC) {
+            return Math.sqrt(Math.pow(resistencia, 2) + Math.pow(XL - XC, 2));
+        }
+
+        function calcularPhi(resistencia, XL, XC) {
+            return Math.atan((XL - XC) / resistencia);
+        }
+
+        function calcularParteReal(resistencia) {
+            return resistencia;
+        }
+
+        function calcularParteImaginaria(XL, XC) {
+            return XL - XC;
+        }
+
+        function ejecutarOperacion() {
+            var frecuencia = parseFloat(document.getElementById('frecuencia').value);
+            var inductancia = parseFloat(document.getElementById('inductancia').value);
+            var capacitancia = parseFloat(document.getElementById('capacitancia').value);
+            var resistencia = parseFloat(document.getElementById('resistencia').value);
+
+            if (isNaN(frecuencia) || isNaN(inductancia) || isNaN(capacitancia) || isNaN(resistencia)) {
+                alert("Por favor, ingrese valores numéricos para todos los parámetros.");
+                return;
+            }
+
+            // Calcular los resultados según la opción seleccionada
+            var opcion = document.getElementById('opcion').value.toUpperCase();
+            var resultado;
+
+            switch (opcion) {
+                case 'R':
+                    resultado = calcularXL(frecuencia, inductancia);
+                    break;
+                case 'L':
+                    resultado = calcularXC(frecuencia, capacitancia);
+                    break;
+                case 'C':
+                    resultado = calcularModuloZ(resistencia, calcularXL(frecuencia, inductancia), calcularXC(frecuencia, capacitancia));
+                    break;
+                case 'F':
+                    resultado = calcularPhi(resistencia, calcularXL(frecuencia, inductancia), calcularXC(frecuencia, capacitancia));
+                    break;
+                case 'Real':
+                    resultado = calcularParteReal(resistencia);
+                    break;
+                case 'Imaginaria':
+                    resultado = calcularParteImaginaria(calcularXL(frecuencia, inductancia), calcularXC(frecuencia, capacitancia));
+                    break;
+                default:
+                    resultado = "Opción no válida";
+            }
+
+            // Mostrar el resultado
+            document.getElementById('resultado').innerHTML = resultado.toFixed(2);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Operaciones con R, L, C, y F</h1>
+    <label for="opcion">Seleccione la operación:</label>
+    <select id="opcion">
+        <option value="R">Calcular XL</option>
+        <option value="L">Calcular XC</option>
+        <option value="C">Calcular Mod(Z)</option>
+        <option value="F">Calcular Phi</option>
+        <option value="Real">Calcular Parte Real</option>
+        <option value="Imaginaria">Calcular Parte Imaginaria</option>
+    </select>
+
+    <br>
+
+    <label for="frecuencia">Frecuencia:</label>
+    <input type="text" id="frecuencia" placeholder="Ingrese la frecuencia">
+
+    <label for="inductancia">Inductancia:</label>
+    <input type="text" id="inductancia" placeholder="Ingrese la inductancia">
+
+    <label for="capacitancia">Capacitancia:</label>
+    <input type="text" id="capacitancia" placeholder="Ingrese la capacitancia">
+
+    <label for="resistencia">Resistencia:</label>
+    <input type="text" id="resistencia" placeholder="Ingrese la resistencia">
+
+    <button onclick="ejecutarOperacion()">Calcular</button>
+
+    <h2>Resultado:</h2>
+    <p id="resultado"></p>
+    <br>
+    <a href="https://magalitello.github.io/sistdecontrol_6toAAV/">Inicio</a>
+</body>
+
+</html>
