@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Magali Tello</title>
+	<script>
+		function calcularHipotenusa(base, altura) {
+			return Math.sqrt(base ** 2 + altura ** 2);
+		}
+
+		function calcularPerimetro(base, altura) {
+			var hipotenusa = calcularHipotenusa(base, altura);
+			var perimetro = base + altura + hipotenusa;
+			return perimetro;
+		}
+
+		function calcularSuperficie(base, altura) {
+			var superficie = (base * altura) / 2;
+			return superficie;
+		}
+
+		function calcular() {
+			var base = parseFloat(document.getElementById('base').value);
+			var altura = parseFloat(document.getElementById('altura').value);
+
+			if (isNaN(base) || isNaN(altura)) {
+				alert("Por favor, ingrese valores numéricos para la base y la altura.");
+				return;
+			}
+
+			var hipotenusa = calcularHipotenusa(base, altura);
+			var perimetro = calcularPerimetro(base, altura);
+			var superficie = calcularSuperficie(base, altura);
+
+			document.getElementById('resultadoHipotenusa').innerHTML = "Hipotenusa: " + hipotenusa.toFixed(2);
+			document.getElementById('resultadoPerimetro').innerHTML = "Perímetro: " + perimetro.toFixed(2);
+			document.getElementById('resultadoSuperficie').innerHTML = "Superficie: " + superficie.toFixed(2);
+		}
+	</script>
+</head>
+
+<body>
+	<h1>Calculadora de Triángulo</h1>
+	<label for="base">Base:</label>
+	<input type="text" id="base" placeholder="Ingrese la base">
+
+	<label for="altura">Altura:</label>
+	<input type="text" id="altura" placeholder="Ingrese la altura">
+
+	<button onclick="calcular()">Calcular</button>
+
+	<h2>Resultados:</h2>
+	<p id="resultadoHipotenusa"></p>
+	<p id="resultadoPerimetro"></p>
+	<p id="resultadoSuperficie"></p>
+	<br>
+	<a href="https://magalitello.github.io/sistdecontrol_6toAAV/">Inicio</a>
+</body>
+
+</html>
